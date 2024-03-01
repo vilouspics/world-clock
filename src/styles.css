@@ -7,16 +7,23 @@ body {
 
 h1 {
     margin-bottom: 40px;
+    text-align: center;
 }
 
 select {
     display: block;
     width: 100%;
-    border-radius: 4px;
     padding: 10px;
     font-size: 13px;
     font-family: monospace;
     margin-bottom: 40px;
+    background-color: #f9f7fe;
+    cursor: pointer;
+    border: 1px solid #dbcdfb;
+    border-radius: 4px;
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none;
 }
 
 h2 {
@@ -30,6 +37,38 @@ footer {
     margin: 0 10px;
     color: #98969b;
 }
+
+img {
+    margin-bottom: 20px;
+    max-width: 130px;
+}
+
+a {
+    color: hsla(257, 84%, 65%, 0.6);
+    position: relative;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+  }
+  
+  a:hover {
+    color: hsla(0, 0%, 0%, 0.5);
+  }
+  
+  a::before {
+    background-color: hsla(257, 84%, 65%, 0.3);
+    bottom: -1px;
+    content: '';
+    display: block;
+    height: 0;
+    left: 0;
+    position: absolute;
+    transition: all .3s ease-in-out;
+    width: 100%;
+  }
+    
+  a:hover::before {
+    height: 100%;
+  }
 
 
 .container {
