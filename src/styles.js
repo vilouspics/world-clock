@@ -1,43 +1,3 @@
-function updateTime() {
-//Los Angeles
-
-let losAngelesElement = document.querySelector("#los-angeles");
-if (losAngelesElement) {
-let losAngelesDateElement = losAngelesElement.querySelector(".date");
-let losAngelesTimeElement = losAngelesElement.querySelector(".time");
-let losAngelesTime = moment().tz("America/Los_Angeles");
-
-losAngelesDateElement.innerHTML = losAngelesTime.format("MMMM Do YYYY");
-losAngelesTimeElement.innerHTML = losAngelesTime.format("h:mm:ss[<small>] A[</small>]");
-}
-
-
-// Paris
-
-let parisElement = document.querySelector("#paris");
-if (parisElement) {
-let parisDateElement = parisElement.querySelector(".date");
-let parisTimeElement = parisElement.querySelector(".time");
-let parisTime = moment().tz("Europe/Paris");
-
-parisDateElement.innerHTML = parisTime.format("MMMM Do YYYY");
-parisTimeElement.innerHTML = parisTime.format("h:mm:ss[<small>] A[</small>]");
-}
-
-// Berlin
-
-let berlinElement = document.querySelector("#berlin");
-if (berlinElement) {
-let berlinDateElement = berlinElement.querySelector(".date");
-let berlinTimeElement = berlinElement.querySelector(".time");
-let berlinTime = moment().tz("Europe/Berlin");
-
-berlinDateElement.innerHTML = berlinTime.format("MMMM Do YYYY");
-berlinTimeElement.innerHTML = berlinTime.format("h:mm:ss[<small>] A[</small>]");
-}
-
-}
-
 function updateCity(event) {
     let cityTimeZone = event.target.value;
     if (cityTimeZone == "current") {
@@ -47,7 +7,7 @@ function updateCity(event) {
     let cityTime = moment().tz(cityTimeZone);
     let citiesElement = document.querySelector("#cities");
     citiesElement.innerHTML = `
-    <div class="city">
+    <div class="city" data-city="${cityTimeZone}">
         <div>
             <h2>${cityName}</h2>
             <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
@@ -57,7 +17,21 @@ function updateCity(event) {
     <a href="/">Take me back</a>`;
 }
 
-updateTime();
+function updateTime() {
+    const cities = document.querySelector('#cities')
+    const allCities = cities.querySelectorAll('.city')
+
+    allCities.forEach((city) => {
+        console.log(city)
+        const getTime = moment().tz(city.dataset.city)
+        const date = city.querySelector('.date')
+        const time = city.querySelector('.time')
+        date.innerHTML = getTime.format('MMM Do YYYY')
+        time.innerHTML = getTime.format('h:mm:ss[<small>] A[</small>]')
+    })
+}
+
+updateTime()  
 setInterval(updateTime, 1000);
 
 let citiesSelectElement = document.querySelector("#city");
